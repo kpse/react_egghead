@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>Render Method</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+</head>
+<body>
+<script type="text/jsx">
+    /***  @jsx React.DOM */
+    var APP = React.createClass({
+        getDefaultProps: function(){
+            return {
+                txt: 'default value',
+                cat: 0
+            }
+        },
+        propTypes: {
+            txt: React.PropTypes.string,
+            cat: React.PropTypes.number.isRequired
+        },
+        getInitialState: function (){
+            return {txt: '', id: 0}
+        },
+        updateTxt: function(e) {
+            this.setState({txt: e.target.value})
+        },
+        render: function () {
+            return (
+                    <div>
+                            <Widget txt={this.state.txt} update={this.updateTxt} />
+                            <Widget txt={this.state.txt} update={this.updateTxt} />
+                            <Widget txt={this.state.txt} update={this.updateTxt} />
+                            <Widget txt={this.state.txt} update={this.updateTxt} />
+                            <h1>{this.state.txt}</h1>
+                            <b>bold</b>
+                    </div>
+            )
+        }
+    });
+
+    var Widget = React.createClass({
+        render: function () {
+            return (
+                    <div>
+                        <input type="text" onChange={this.props.update} />
+                        <h1>{this.props.txt}</h1>
+                        <b>bold</b>
+                    </div>
+            )
+        }
+
+    });
+    React.renderComponent(<APP cat={5} />, document.body);
+</script>
+</body>
+</html>

@@ -11,44 +11,42 @@
 <script type="text/jsx">
     /***  @jsx React.DOM */
     var APP = React.createClass({
-        getDefaultProps: function(){
-            return {
-                txt: 'default value',
-                cat: 0
-            }
+        getInitialState: function () {
+            return {red: 128, green: 128, blue: 128}
         },
-        propTypes: {
-            txt: React.PropTypes.string,
-            cat: React.PropTypes.number.isRequired
-        },
-        getInitialState: function (){
-            return {txt: '', id: 0}
-        },
-        updateTxt: function(e) {
-            this.setState({txt: e.target.value})
+        update: function (e) {
+            this.setState({
+                red: this.refs.red.refs.colorRange.getDOMNode().value,
+                green: this.refs.green.refs.colorRange.getDOMNode().value,
+                blue: this.refs.blue.refs.colorRange.getDOMNode().value
+            })
         },
         render: function () {
             return (
                     <div>
-                            <Widget txt={this.state.txt} update={this.updateTxt} />
-                            <Widget txt={this.state.txt} update={this.updateTxt} />
-                            <Widget txt={this.state.txt} update={this.updateTxt} />
-                            <Widget txt={this.state.txt} update={this.updateTxt} />
-                            <h1>{this.state.txt}</h1>
-                            <b>bold</b>
+                    {this.state.txt}
+                        <hr />
+                        red:
+                        <Slider ref="red" txt={this.state.txt} update={this.update} />
+                        <label>{this.state.red}</label>
+                        <hr />
+                    green:
+                        <Slider ref="green" txt={this.state.txt} update={this.update} />
+                        <label>{this.state.green}</label>
+                        <hr />
+                    blue:
+                        <Slider ref="blue" txt={this.state.txt} update={this.update} />
+                        <label>{this.state.blue}</label>
+                        <hr />
                     </div>
             )
         }
     });
 
-    var Widget = React.createClass({
+    var Slider = React.createClass({
         render: function () {
             return (
-                    <div>
-                        <input type="text" onChange={this.props.update} />
-                        <h1>{this.props.txt}</h1>
-                        <b>bold</b>
-                    </div>
+                    <input ref="colorRange" type="range" min="0" max="255" onChange={this.props.update} />
             )
         }
 

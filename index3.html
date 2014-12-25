@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>transferPropsTo</title>
+    <link rel="stylesheet"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+    <script src="http://fb.me/react-0.12.1.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
+    <style>
+        .btn {
+            margin: 25px;
+        }
+    </style>
+</head>
+<body>
+<div id="panel"></div>
+<script type="text/jsx">
+    /***  @jsx React.DOM */
+    var APP = React.createClass({
+        update: function () {
+            var newVal = this.props.val + 1
+            this.setProps({val: newVal})
+        },
+        componentWillMount: function () {
+            console.log("here I go")
+        },
+        render: function () {
+            console.log("hello world")
+            return (
+                    <button onClick={this.update}>{this.props.val}</button>
+            )
+        },
+        componentDidMount: function () {
+            console.log("mountted")
+        }
+    });
+
+    React.renderComponent(<APP val={5} />, document.getElementById('panel'));
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>transferPropsTo</title>
+    <link rel="stylesheet"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+    <script src="http://fb.me/react-0.12.1.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
+    <style>
+        .btn {
+            margin: 25px;
+        }
+    </style>
+</head>
+<body>
+<script type="text/jsx">
+    /***  @jsx React.DOM */
+    var APP = React.createClass({
+        render: function () {
+            return (
+                    <div>
+                        <BButton className="btn-primary">
+                            <BIcon className="glyphicon-heart" />
+                            Button </BButton>
+                        <BButton className="btn-primary">
+                            <BIcon className="glyphicon-pencil" />
+                            Button </BButton>
+                        <BButton className="btn-primary">
+                            <BIcon className="glyphicon-inbox" />
+                            Button </BButton>
+                        <BButton className="btn-primary">
+                            <BIcon className="glyphicon-inbox" />
+                            Button </BButton>
+                    </div>
+            )
+        }
+    });
+
+    var BButton = React.createClass({
+        render: function () {
+            return this.transferPropsTo(<a className="btn">{this.props.children}</a>)
+
+        }
+
+    });
+
+    var BIcon =
+            React.createClass({
+                render: function () {
+                    return this.transferPropsTo(<span className="glyphicon"></span>)
+                }
+            });
+
+    React.renderComponent(<APP cat={5} />, document.body);
+</script>
+</body>
+</html>

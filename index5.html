@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>react component lifecycle</title>
+    <link rel="stylesheet"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+    <script src="http://fb.me/react-0.12.1.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
+    <style>
+        .btn {
+            margin: 25px;
+        }
+    </style>
+</head>
+<body>
+<div id="panel"></div>
+<script type="text/jsx">
+    /***  @jsx React.DOM */
+    var APP = React.createClass({
+        update: function () {
+            var newVal = this.props.val + 1
+            this.setProps({val: newVal})
+        },
+        shouldComponentUpdate: function (nextprops, nextstate) {
+            return nextprops.val % 3 === 0
+        },
+        componentWillUpdate: function (nextProps, nextState) {
+            console.log("nextProps === " + JSON.stringify(nextProps))
+        },
+        render: function () {
+            console.log("hello world")
+            return (
+                    <button style={this.btnStyle}
+                            onClick={this.update}>
+                    {this.props.val}
+                    </button>
+            )
+        }
+    });
+
+
+    React.renderComponent(<APP val={0} />, document.getElementById('panel'));
+
+
+    window.unmount = function () {
+        React.unmountComponentAtNode(document.getElementById('panel'))
+    }
+
+
+</script>
+</body>
+</html>

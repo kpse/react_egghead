@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>JSX Browser compiler</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <script src="http://fb.me/react-with-addons-0.12.2.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/jsx">
+    /** @jsx React.DOM */
+    var APP = React.createClass({
+        mixins: [React.addons.LinkedStateMixin],
+        getInitialState: function () {
+          return {
+              name: '',
+              email: '',
+              phone: ''
+          }
+        },
+        render: function () {
+            return (
+                    <form>
+                        <div>
+                            <input valueLink={this.linkState('name')} type="text" placeholder="name" />
+                            <label>*{this.state.name}*</label>
+                        </div>
+                        <div>
+                            <input valueLink={this.linkState('email')} type="email" placeholder="email" />
+                            <label>*{this.state.email}*</label>
+                        </div>
+                        <div>
+                            <input valueLink={this.linkState('phone')} type="text" placeholder="phone" />
+                            <label>*{this.state.phone}*</label>
+                        </div>
+                    </form>
+            )
+        }
+    });
+
+
+    React.render(
+            <APP />
+            ,
+            document.getElementById('app')
+    )
+</script>
+</body>
+</html>

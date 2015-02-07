@@ -24,14 +24,17 @@ var Transformer = React.createClass({
 
   },
   render: function () {
+    var myStyle = {
+      height: 1000
+    }
     return (
       <div>
         <div className="row">
         <p className="alert alert-danger">&nbsp;{this.state.err}</p>
         </div>
         <div className="row">
-          <textarea className="col-sm-6 input-lg" defaultValue={this.state.input} onChange={this.update}></textarea>
-          <pre className="col-sm-6 input-lg">{this.state.output}</pre>
+          <textarea style={myStyle} className="col-sm-6 input-lg" defaultValue={this.state.input} onChange={this.update}></textarea>
+          <pre style={myStyle} className="col-sm-6 input-lg">{this.state.output}</pre>
         </div>
       </div>
     )
